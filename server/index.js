@@ -8,7 +8,7 @@ import schema from './schema/schema';
 
 
 const app = express();
-const PORT = 8080;
+const PORT = 3000;
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/todo_db');
@@ -18,7 +18,7 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, './../public')));
 
 app.listen(PORT, () => {
     console.log(`Server is listening on PORT ${PORT}`);

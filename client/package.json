@@ -5,7 +5,8 @@
   "main": "app/index.js",
   "scripts": {
     "start": "webpack --mode development --watch --open --hot",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "relay": "relay-compiler --src ./app --schema ./app/data/schema.graphql --extensions js jsx"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +15,11 @@
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-relay": "^6.0.0",
     "css-loader": "^3.2.0",
+    "graphql": "^14.5.7",
+    "relay-compiler": "^6.0.0",
+    "relay-config": "^6.0.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.9",
@@ -22,6 +27,8 @@
   },
   "dependencies": {
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "react-relay": "^6.0.0",
+    "react-router-dom": "^5.1.0"
   }
 }
