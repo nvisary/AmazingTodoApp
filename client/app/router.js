@@ -1,13 +1,17 @@
-import { App } from './components/App';
+import { Switch, Route } from 'react-router-dom';
+import React from 'react'
 
-const Test = () => <div>test</div>
-const Test2 = () => <div>test</div>
+import { App } from './containers/App';
+import { LoginPage } from './containers/LoginPage';
+import { RegistrationPage } from './containers/RegistrationPage';
+
 
 export const AppRouter = () => {
-    <main>
+    return (
         <Switch>
-            <Route path='/test' exact component={Test}></Route>
-            <Route path='/test1' exact component={Test2}></Route>
+            <Route exact path='/' component={App} />
+            <Route exact path='/login' component={LoginPage} />
+            <Route exact path='/registration' component={RegistrationPage} />
         </Switch>
-    </main>
+    );
 }
