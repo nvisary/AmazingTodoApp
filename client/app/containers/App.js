@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 export const App = () => {
     return (
         <div>
-            <Link to='/registration'>Registration</Link>
+            <Link to='/signup'>Signup</Link>
             <Link to='/login'>Login</Link>
         </div>
 
