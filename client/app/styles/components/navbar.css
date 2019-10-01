@@ -1,0 +1,26 @@
+.navbar {
+    height: 64px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    flex: 0 0 auto;
+    background: #282c34;
+}
+
+.navbar-right {
+    width: 150px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+a {
+    margin: 0 10px 0 0;
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: rgb(23, 117, 26);
+}

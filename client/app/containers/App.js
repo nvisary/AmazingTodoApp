@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-
-import '../styles/App.css';
-
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from '../relay-env';
 import { Link } from 'react-router-dom';
 
+import '../styles/containers/App.css';
 
+import useWithAuthenticate from './../components/UseWithAuthenticate'; 
+import NavBar from './../components/NavBar'; 
 
 export const App = () => {
+    useWithAuthenticate(); 
+
     return (
-        <div>
-            <Link to='/signup'>Signup</Link>
-            <Link to='/login'>Login</Link>
+        <>
+        <NavBar/>
+        <div className='app-container'>
+            
+            Welcome to Amazing TODO app
         </div>
-
+        </>
     );
-
-}
+};
 
 
