@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
-import { StoreContext } from 'redux-react-hook';
-import store from './store';
+import { store } from './store';
+import {Provider} from 'react-redux'; 
 
 import { AppRouter } from './router';
-
+console.log("Store"); 
+console.log(store); 
 ReactDOM.render((
-    <StoreContext.Provider value={store}>
+    <Provider store={store}>
         <HashRouter>
             <AppRouter />
         </HashRouter>
-    </StoreContext.Provider>
+    </Provider>
 ), document.getElementById('root')); 

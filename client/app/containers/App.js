@@ -1,23 +1,20 @@
-import React, { Component } from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
-import environment from '../relay-env';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 import '../styles/containers/App.css';
 
-import useWithAuthenticate from './../components/UseWithAuthenticate'; 
-import NavBar from './../components/NavBar'; 
+import { useWithAuthenticate } from './../components/UseWithAuthenticate';
+import NavBar from './../components/NavBar';
 
 export const App = () => {
-    useWithAuthenticate(); 
+    useWithAuthenticate();
 
     return (
         <>
-        <NavBar/>
-        <div className='app-container'>
-            
-            Welcome to Amazing TODO app
-        </div>
+            <NavBar />
+            <div className='app-container'>
+
+                Welcome to Amazing TODO app
+            </div>
         </>
     );
 };

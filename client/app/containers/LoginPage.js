@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-import { useDispatch } from 'redux-react-hook';
-import * as actions from './../constants/action_types';
-import * as routes from './../constants/routes';
+import React, { useState, useEffect } from 'react';
 
+import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from './../redux/actions/session';
+import * as routes from './../constants/routes';
 import NavBar from './../components/NavBar';
 
-function LoginPage() {
+export const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState('');
     const [redirect, setRedirect] = useState('');
+
     const dispatch = useDispatch();
+    const error = useSelector(state => state.sessionState.loginError.message);
+    const loading = useSelector(state => state.sessionState.isLoading);
+    const authUser = useSelector(state => state.sessionState.authUser); 
 
     const handleChange = setter => e => {
         setter(e.target.value);
@@ -21,49 +22,8 @@ function LoginPage() {
 
     const submit = async (e) => {
         e.preventDefault();
-        setLoading(true);
-
-        try {
-            const requestBody = {
-                query: `
-                    query {
-                        login(email: "${email}", password: "${password}") 
-                        {
-                            _id
-                            token
-                            email
-                        }
-                    }
-
-                `
-            };
-
-            const { data } = await axios.post('http://localhost:3000/graphql', requestBody);
-
-            if (data.errors) {
-                setError(data.errors[0].message);
-                setLoading(false);
-            } else {
-                setError(null);
-                setLoading(false);
-                const { _id, token } = await data.data.login;
-
-                dispatch({
-                    type: actions.SET_AUTH_USER,
-                    authUser: {
-                        _id,
-                        email
-                    }
-                });
-                localStorage.setItem('token', token);
-                setRedirect(true);
-            }
-        }
-        catch (e) {
-            setError(e);
-            setLoading(false);
-        }
-
+        dispatch(loginUser(email, password));
+        
     }
 
     return (
@@ -87,5 +47,3 @@ function LoginPage() {
         </>
     );
 }
-
-export default LoginPage; 
