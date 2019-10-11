@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from './../redux/actions/session';
-import * as routes from './../constants/routes';
-import NavBar from './../components/NavBar';
+import { HOME } from './../constants/routes';
+import { NavBar } from './../components/NavBar';
 
 export const LoginPage = context => {
     const [email, setEmail] = useState('');
@@ -14,10 +14,10 @@ export const LoginPage = context => {
     const dispatch = useDispatch();
     const error = useSelector(state => state.sessionState.loginError.message);
     const loading = useSelector(state => state.sessionState.isLoading);
-    const authUser = useSelector(state => state.sessionState.authUser); 
-    
+    const authUser = useSelector(state => state.sessionState.authUser);
+
     if (authUser) {
-        context.history.push('/'); 
+        context.history.push(HOME);
     }
 
     const handleChange = setter => e => {
@@ -44,7 +44,7 @@ export const LoginPage = context => {
                         <input className="form-submit" type="submit" value={loading ? "Verifying..." : "Login"} />
                     </form>
                 </div>
-                {redirect ? <Redirect to={routes.HOME} /> : null}
+                {redirect ? <Redirect to={HOME} /> : null}
             </div>
 
         </>
