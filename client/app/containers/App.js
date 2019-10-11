@@ -1,22 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { verifyToken } from './../redux/actions/session';
+import { NavBar } from './../components/NavBar';
 
-import '../styles/App.css';
-
-import { QueryRenderer, graphql } from 'react-relay';
-import environment from '../relay-env';
-import { Link } from 'react-router-dom';
-
-
+import '../styles/containers/App.css';
 
 export const App = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(verifyToken());
+    }, [dispatch]);
+
     return (
-        <div>
-            <Link to='/registration'>Registration</Link>
-            <Link to='/login'>Login</Link>
-        </div>
-
+        <>
+            <NavBar />
+            <div className='app-container'>
+                Welcome to Amazing TODO app
+            </div>
+        </>
     );
-
-}
+};
 
 
