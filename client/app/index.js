@@ -5,8 +5,6 @@ import { store } from './store';
 import {Provider} from 'react-redux'; 
 
 import { AppRouter } from './router';
-console.log("Store"); 
-console.log(store); 
 ReactDOM.render((
     <Provider store={store}>
         <HashRouter>

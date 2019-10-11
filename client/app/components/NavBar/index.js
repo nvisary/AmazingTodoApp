@@ -4,7 +4,7 @@ import { AuthNavBar } from './auth';
 import { NonAuthNavBar } from './nonauth';
 
 const NavBar = () => {
-    const authUser = useSelector(store => store.sessionState.authUser); 
+    const authUser = useSelector(store => store.sessionState.authUser);  
     return authUser ? <AuthNavBar /> : <NonAuthNavBar />
 }
 

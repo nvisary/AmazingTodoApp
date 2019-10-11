@@ -37,7 +37,7 @@ export const verifyTokenError = (error) => {
 export const verifyToken = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
-        if (!token) {
+        if (token) {
             const requestBody = {
                 query: `
                 query {

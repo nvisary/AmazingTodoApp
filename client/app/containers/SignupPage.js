@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; 
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { signupUser } from './../redux/actions/session';
-import * as routes from '../constants/routes';
+import { HOME } from '../constants/routes';
 
 import NavBar from './../components/NavBar';
 
@@ -13,15 +13,15 @@ export const SignupPage = props => {
     const dispatch = useDispatch();
 
     const error = useSelector(state => state.sessionState.signupError);
-    const loading = useSelector(state => state.sessionState.isLoading); 
-    const redirect = false; 
+    const loading = useSelector(state => state.sessionState.isLoading);
+    const redirect = false;
 
     const handleChange = setter => e => {
         setter(e.target.value);
     }
 
     const submit = e => {
-        dispatch(signupUser(email, password, confirm)); 
+        dispatch(signupUser(email, password, confirm));
     }
 
     return (
@@ -40,7 +40,7 @@ export const SignupPage = props => {
                         <input className="form-submit" type="submit" value={loading ? "Verifying..." : "Register"} />
                     </form>
                 </div>
-                {redirect ? <Redirect to={routes.HOME} /> : null}
+                {redirect ? <Redirect to={HOME} /> : null}
             </div>
         </>
     );

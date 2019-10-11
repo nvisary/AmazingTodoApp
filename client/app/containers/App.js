@@ -1,18 +1,22 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { verifyToken } from './../redux/actions/session';
+import NavBar from './../components/NavBar';
 
 import '../styles/containers/App.css';
 
-import { useWithAuthenticate } from './../components/UseWithAuthenticate';
-import NavBar from './../components/NavBar';
-
 export const App = () => {
-    useWithAuthenticate();
+    const dispatch = useDispatch(); 
+    
+    useEffect(() => {
+        dispatch(verifyToken()); 
+    }, [dispatch]);
 
     return (
         <>
             <NavBar />
             <div className='app-container'>
-
                 Welcome to Amazing TODO app
             </div>
         </>
