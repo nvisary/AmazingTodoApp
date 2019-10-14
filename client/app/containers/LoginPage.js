@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from './../redux/actions/session';
-import { HOME } from './../constants/routes';
+import { PROFILE } from './../constants/routes';
 import { NavBar } from './../components/NavBar';
 
 export const LoginPage = context => {
@@ -17,7 +17,7 @@ export const LoginPage = context => {
     const authUser = useSelector(state => state.sessionState.authUser);
 
     if (authUser) {
-        context.history.push(HOME);
+        context.history.push(PROFILE);
     }
 
     const handleChange = setter => e => {
@@ -44,7 +44,6 @@ export const LoginPage = context => {
                         <input className="form-submit" type="submit" value={loading ? "Verifying..." : "Login"} />
                     </form>
                 </div>
-                {redirect ? <Redirect to={HOME} /> : null}
             </div>
 
         </>

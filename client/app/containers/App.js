@@ -1,17 +1,10 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { verifyToken } from './../redux/actions/session';
 import { NavBar } from './../components/NavBar';
-
+import { Auth } from './../components/Auth';
 import '../styles/containers/App.css';
 
 export const App = () => {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(verifyToken());
-    }, [dispatch]);
+    Auth(); 
 
     return (
         <>

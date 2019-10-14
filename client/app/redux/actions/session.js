@@ -1,3 +1,5 @@
+import { Token } from './../../services/tokenservice';
+
 export const SET_AUTH_USER = 'SET_AUTH_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const SING_UP_USER = 'SING_UP_USER';
@@ -9,11 +11,15 @@ export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 export const VERIFY_TOKEN_SUCCESS = 'VERIFY_TOKEN_SUCCESS';
 export const VERIFY_TOKEN_ERROR = 'VERIFY_TOKEN_ERROR';
 
+const tokenService = new Token(); 
+
 export const logoutUser = () => {
-    localStorage.removeItem('token');
+    tokenService.removeToken(); 
     return {
         type: LOGOUT_USER,
         authUser: null,
+        loginError: null, 
+        signupError: null
     }
 };
 
@@ -26,7 +32,7 @@ export const verifyTokenSuccess = (user) => ({
 });
 
 export const verifyTokenError = (error) => {
-    localStorage.removeItem('token');
+    tokenService.removeToken(); 
     return {
         type: VERIFY_TOKEN_ERROR,
         authUser: null,
@@ -36,7 +42,7 @@ export const verifyTokenError = (error) => {
 
 export const verifyToken = () => {
     return dispatch => {
-        const token = localStorage.getItem('token');
+        const token = tokenService.getToken(); 
         if (token) {
             const requestBody = {
                 query: `
@@ -73,7 +79,7 @@ export const verifyToken = () => {
 }
 
 export const loginUserSuccess = (_id, token, email) => {
-    localStorage.setItem('token', token);
+    tokenService.saveToken(token); 
     return {
         type: LOGIN_USER_SUCCESS,
         isLoading: false,
@@ -141,16 +147,16 @@ export const loginUser = (email, password) => {
 
 export const signupUserAction = () => {
     return {
-        type: SING_UP_USER, 
+        type: SING_UP_USER,
         isLoading: true
     }
 }
 
 export const signupUserSuccess = (_id, token) => {
     return {
-        type: SIGN_UP_USER_SUCCESS, 
+        type: SIGN_UP_USER_SUCCESS,
         authUser: {
-            _id, 
+            _id,
             token
         }
     }
@@ -158,16 +164,16 @@ export const signupUserSuccess = (_id, token) => {
 
 export const signupUserError = (error) => {
     return {
-        type: SIGN_UP_USER_ERROR, 
-        signupError: error, 
-        isLoading: false 
+        type: SIGN_UP_USER_ERROR,
+        signupError: error,
+        isLoading: false
     }
 }
 
 export const signupUser = (email, password, confirm) => {
     return dispatch => {
-        dispatch(signupUserAction()); 
-        
+        dispatch(signupUserAction());
+
         const requestBody = {
             query: `
                 mutation {
@@ -199,9 +205,9 @@ export const signupUser = (email, password, confirm) => {
                 if (data.errors) {
                     throw Error(data.errors[0].message);
                 }
-                const {_id, token } = data.data.createUser; 
-                console.log(_id, " ",  token) 
-                dispatch(signupUserSuccess(_id, token)); 
+                const { _id, token } = data.data.createUser;
+                console.log(_id, " ", token)
+                dispatch(signupUserSuccess(_id, token));
             })
             .catch(error => dispatch(signupUserError(error.message)));
     }
